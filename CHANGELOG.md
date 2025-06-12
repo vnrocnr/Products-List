@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* resolve layout conflict between <v-main> and Vue main by deleting initial margin in main css file ([d1eb5ad](https://github.com/vnrocnr/Products-List/commit/d1eb5ade263e9523e401cd804a24df512943ba37))
+* resolve layout conflict between `<v-main>` and Vue's main by deleting initial margin in main.css file ([d1eb5ad](https://github.com/vnrocnr/Products-List/commit/d1eb5ade263e9523e401cd804a24df512943ba37))
 
 ### [0.0.2](https://github.com/vnrocnr/Products-List/compare/v0.0.1...v0.0.2) (2025-06-12)
 ### Features
