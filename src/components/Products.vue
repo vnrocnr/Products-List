@@ -151,18 +151,18 @@
             />
           </td>
           <td>
-            <v-rating
-              :model-value="`${product.rating?.rate || 0}`"
-              color="amber"
-              density="compact"
-              size="small"
-              half-increments
-              readonly
-              height="20"
-            ></v-rating>
-              {{ product.rating?.rate ?? 'N/A' }} 
-              ({{ product.rating?.count ?? 0 }})
-          </td>
+  <v-rating
+    :model-value="product.rating?.rate ?? 0"
+    color="amber"
+    density="compact"
+    size="small"
+    half-increments
+    readonly
+    height="20"
+  ></v-rating>
+  {{ product.rating?.rate ?? 'N/A' }}
+  ({{ product.rating?.count ?? '0' }})
+</td>
           <td>
            <v-card class="d-flex ga-2"  height="35" width="60" variant="flat">
           
@@ -170,18 +170,17 @@
             <v-dialog max-width="500">
               <template v-slot:activator="{ props: activatorProps }">
                
-                  <v-btn height="25" width="25" icon="mdi-pencil" size="x-small" class="bg-purple-darken-1" v-bind="activatorProps" @click="fetchProduct(product.id)">
+                  <v-btn height="25" width="25" icon="mdi-pencil" size="x-small" class="bg-purple-darken-1" v-bind="activatorProps" >
                          
                  </v-btn>
              
         
               </template>
 
-                <UpdateForm :productData="product" @update-product-data="updateProduct(product.id)"/>
+
+                <UpdateForm  v-model:dialogVisible="dialog" :productData="product" :onUpdate="updateProduct"/>
             </v-dialog>
-            <!-- <v-btn variant="tonal" color="green-lighten-1" icon="mdi-pencil"></v-btn> -->
-          
-               <v-btn :color="isHovering ? 'primary' : undefined" height="25" width="25" icon="mdi-trash-can-outline" size="x-small" class="bg-purple-lighten-5" v-bind="activatorProps" @click="fetchProduct(product.id)">
+       <v-btn height="25" width="25" icon="mdi-trash-can-outline" size="x-small" class="bg-purple-lighten-5" >
                   
                  </v-btn>
              
@@ -200,6 +199,8 @@ import { onMounted } from "vue";
 import { useProductsStore } from "@/stores/products";
 import { storeToRefs } from "pinia";
 import UpdateForm from "./UpdateForm.vue";
+
+
 const { products, e, loading } = storeToRefs(useProductsStore());
 const { idSort, header, filteredProducts, searchFilter, limitDesc } =
   storeToRefs(useProductsStore());
@@ -207,9 +208,15 @@ const { fetchProducts, fetchProduct, updateProduct } = useProductsStore();
     
 fetchProducts();
 
+const show = false;
 
+const search = ref("");
+
+const dialog = ref(false);
 onMounted(() => {
-  console.log(products);
+  console.log(filteredProducts);
   console.log("limitdesc", limitDesc);
+
+  
 });
 </script>
