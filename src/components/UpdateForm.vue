@@ -1,4 +1,4 @@
-<template>
+<template >
   <v-card height="400" class="d-flex flex-column pa-4">
     <h3>Update Item Details</h3>
     <p>Item: {{ productData.title }}</p>
@@ -43,10 +43,13 @@
       >
     </v-text-field> -->
 
-      <v-btn class="mt-2" type="submit" block >Submit</v-btn>
-       <v-btn @click="handleReset">
+    <div class="buttons d-flex flex-column ga-2">
+         <v-btn class="mt-2 bg-purple-darken-2" type="submit" block >Submit</v-btn>
+       <v-btn @click="handleReset" variant="tonal">
       clear
     </v-btn>
+    </div>
+     
     </v-form>
   </v-card>
 </template>
@@ -60,12 +63,16 @@ import { ref, defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   productData: Object,
+  onUpdate: Function,
+  dialogVisible: Boolean,
   require: true,
 });
 
 
-
-const emit = defineEmits(['updateProductData'])
+const emit = defineEmits([
+  'updateProductData',
+  'update:dialogVisible'
+])
 
 const categories = [
   "men's clothing",
@@ -107,24 +114,42 @@ return true
   })
 
   const form = ref()
-    const id = props.productData.id
-const category = useField('category', undefined, {
-    initialValue: props.productData.category
-})
-const title = useField('title', undefined, {
-    initialValue: props.productData.title
-})
-const price = useField('price', undefined, {
-    initialValue: props.productData.price
-})
-const description = useField('description', undefined, {
-    initialValue: props.productData.description
-})
+   
+        const category = useField('category', undefined, {
+            initialValue: props.productData.category
+        })
+        const title = useField('title', undefined, {
+            initialValue: props.productData.title
+        })
+        const price = useField('price', undefined, {
+            initialValue: props.productData.price
+        })
+        const description = useField('description', undefined, {
+            initialValue: props.productData.description
+        })
 
 
 
     const submit = handleSubmit(values => {
-        console.log(values)
-        // emit('updateProductData', values)
+        // console.log(values)
+       try{
+              props.onUpdate(props.productData.id, {
+               title: values.title,
+            price: values.price,
+            description: values.description,
+            category: values.category,
+            rate: props.productData.rating?.rate,
+            image: props.productData.image,
+            
+        })
+   
+        emit('update:dialogVisible', false)
+        } catch (e){
+            return e
+        }
+
+   
+       
+      
   })
 </script>
