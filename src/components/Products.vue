@@ -152,7 +152,7 @@
           </td>
           <td>
             <v-rating
-              :model-value="`${product.rating.rate}`"
+              :model-value="`${product.rating?.rate || 0}`"
               color="amber"
               density="compact"
               size="small"
@@ -160,8 +160,8 @@
               readonly
               height="20"
             ></v-rating>
-            {{ product.rating.rate }}
-            ({{ product.rating.count }})
+              {{ product.rating?.rate ?? 'N/A' }} 
+              ({{ product.rating?.count ?? 0 }})
           </td>
           <td>
            <v-card class="d-flex ga-2"  height="35" width="60" variant="flat">
@@ -177,7 +177,7 @@
         
               </template>
 
-                <UpdateForm :productData="product"/>
+                <UpdateForm :productData="product" @update-product-data="updateProduct(product.id)"/>
             </v-dialog>
             <!-- <v-btn variant="tonal" color="green-lighten-1" icon="mdi-pencil"></v-btn> -->
           
@@ -207,22 +207,6 @@ const { fetchProducts, fetchProduct, updateProduct } = useProductsStore();
     
 fetchProducts();
 
-const show = false;
-
-const search = ref("");
-
-const updateData = (product) => {
-  const updatedData = {
-    title: product.id,
-    price: product.price,
-    description: product.description,
-    category: product.category,
-    image: product.image,
-    rating: product.rating,
-  };
-
-  products.value.push(updatedData);
-};
 
 onMounted(() => {
   console.log(products);
