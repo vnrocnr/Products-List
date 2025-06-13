@@ -1,6 +1,6 @@
 import Products from '@/components/Products.vue'
 import  {defineStore} from 'pinia'
-
+import axios from "axios";
 
 export const useProductsStore = defineStore('product', {
       id: 'product',
@@ -42,7 +42,8 @@ export const useProductsStore = defineStore('product', {
                     this.products =[]
 
                 try{    
-                        this.products = await fetch('https://fakestoreapi.com/products').then((response) => response.json())
+                    const res =  await axios.get('https://fakestoreapi.com/products')
+                        this.products = res.data
                 } catch(e){
                         this.error = e
                 } finally{
@@ -52,9 +53,9 @@ export const useProductsStore = defineStore('product', {
 
             async fetchProduct(id) {
                 try{
-                        this.products = await(fetch('https://fakestoreapi.com/products/1')
+                        this.products = await(fetch(`https://fakestoreapi.com/products/${id}`)
                                     .then(response => response.json())
-                                    .then(data => console.log(data)))
+                )
                 } catch(e){
                    this.error = e
                 } finally{
@@ -62,15 +63,18 @@ export const useProductsStore = defineStore('product', {
                 }
             },
 
-            async updateProduct() {
+            async updateProduct(id) {
                 try{
-                    this.products = await(fetch('https://fakestoreapi.com/products/1', {
+                    this.products = await(fetch(`https://fakestoreapi.com/products/${id}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(product)
+                        body: JSON.stringify(this.products)
                         })
                         .then(response => response.json())
-                        .then(data => console.log(data)))
+                        .then(data => console.log(data))
+                        )
+
+                        
                 } catch(e) {
                     this.e = e
                 }
