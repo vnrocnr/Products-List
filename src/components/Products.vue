@@ -113,9 +113,29 @@
         density="comfortable"
       ></v-text-field>
 
-      <v-btn prepend-icon="mdi-plus" class="bg-purple-darken-1 position-absolute right-0"
-        >Add Product</v-btn
-      >
+      <!-- Start of Add Product Container -->
+      <div class="text-center pa-4">
+        <v-btn
+          @click="dialog = true"
+          prepend-icon="mdi-plus"
+          class="bg-purple-darken-1 position-absolute right-0"
+          >Add Product</v-btn
+        >
+        <v-dialog v-model="dialog" width="600">
+          <v-card
+            max-width="auto"
+            prepend-icon="mdi-update"
+            text="Please be guided accordingly"
+            title="Add new Product Here"
+          >
+            <AddProductForm 
+              @closeDialog="dialog=false"
+              :addNewProduct="addProduct"
+              />
+          </v-card>
+        </v-dialog>
+      </div>
+      <!-- End of Add Product Container -->
     </v-sheet>
     <v-table height="650px" width="700px" class="d-flex" fixed-header>
       <thead>
@@ -151,41 +171,52 @@
             />
           </td>
           <td>
-  <v-rating
-    :model-value="product.rating?.rate ?? 0"
-    color="amber"
-    density="compact"
-    size="small"
-    half-increments
-    readonly
-    height="20"
-  ></v-rating>
-  {{ product.rating?.rate ?? 'N/A' }}
-  ({{ product.rating?.count ?? '0' }})
-</td>
+            <v-rating
+              :model-value="product.rating?.rate ?? 0"
+              color="amber"
+              density="compact"
+              size="small"
+              half-increments
+              readonly
+              height="20"
+            ></v-rating>
+            {{ product.rating?.rate ?? "N/A" }}
+            ({{ product.rating?.count ?? "0" }})
+          </td>
           <td>
-           <v-card class="d-flex ga-2"  height="35" width="60" variant="flat">
-          
+            <!-- Start of Update Product Container -->
 
-            <v-dialog max-width="500">
-              <template v-slot:activator="{ props: activatorProps }">
-               
-                  <v-btn height="25" width="25" icon="mdi-pencil" size="x-small" class="bg-purple-darken-1" v-bind="activatorProps" >
-                         
-                 </v-btn>
-             
-        
-              </template>
+            <v-card class="d-flex ga-2" height="35" width="60" variant="flat">
+              <v-dialog max-width="500">
+                <template v-slot:activator="{ props: activatorProps }">
+                  <v-btn
+                    height="25"
+                    width="25"
+                    icon="mdi-pencil"
+                    size="x-small"
+                    class="bg-purple-darken-1"
+                    v-bind="activatorProps"
+                  >
+                  </v-btn>
+                </template>
 
+                <UpdateForm
+                  v-model:dialogVisible="dialog"
+                  :productData="product"
+                  :onUpdate="updateProduct"
+                />
+              </v-dialog>
+              <v-btn
+                height="25"
+                width="25"
+                icon="mdi-trash-can-outline"
+                size="x-small"
+                class="bg-purple-lighten-5"
+              >
+              </v-btn>
+            </v-card>
 
-                <UpdateForm  v-model:dialogVisible="dialog" :productData="product" :onUpdate="updateProduct"/>
-            </v-dialog>
-       <v-btn height="25" width="25" icon="mdi-trash-can-outline" size="x-small" class="bg-purple-lighten-5" >
-                  
-                 </v-btn>
-             
-           </v-card>
-           
+            <!-- End of Add Product Container -->
           </td>
         </tr>
       </tbody>
@@ -199,24 +230,20 @@ import { onMounted } from "vue";
 import { useProductsStore } from "@/stores/products";
 import { storeToRefs } from "pinia";
 import UpdateForm from "./UpdateForm.vue";
+import AddProductForm from "./AddProductForm.vue";
 
-
-const { products, e, loading } = storeToRefs(useProductsStore());
-const { idSort, header, filteredProducts, searchFilter, limitDesc } =
+// const { products, e, loading } = storeToRefs(useProductsStore());
+const {  header, filteredProducts, searchFilter } =
   storeToRefs(useProductsStore());
-const { fetchProducts, fetchProduct, updateProduct } = useProductsStore();
-    
+const { fetchProducts, fetchProduct, updateProduct, addProduct } = useProductsStore();
+
 fetchProducts();
 
-const show = false;
 
-const search = ref("");
 
 const dialog = ref(false);
 onMounted(() => {
-  console.log(filteredProducts);
-  console.log("limitdesc", limitDesc);
+  // console.log(filteredProducts);
 
-  
 });
 </script>
