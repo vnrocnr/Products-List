@@ -66,15 +66,17 @@ export const useProductsStore = defineStore('product', {
             async updateProduct(id, product) {
                 try{
 
-                    const res = await axios.patch(`https://fakestoreapi.com/products/${id}`, product)
+                    const res = await axios.put(`https://fakestoreapi.com/products/${id}`, product)
                     const updated = res.data
                     
                     const index = this.products.findIndex(p => p.id === id)
                     if(index !== -1){
+                           updatedData.rating = this.products[index].rating ?? { rate: 0, count: 0 }
+
                         this.products[index] = updated
     
                     }
-                        
+                        console.log(updated)
 
                         
                 } catch(e) {
@@ -87,6 +89,7 @@ export const useProductsStore = defineStore('product', {
                 finally{
                     this.isLoading = false
                 }
+                
             }
 
             
