@@ -53,9 +53,9 @@ export const useProductsStore = defineStore('product', {
 
             async fetchProduct(id) {
                 try{
-                        this.products = await(fetch(`https://fakestoreapi.com/products/${id}`)
-                                    .then(response => response.json())
-                )
+                    const res =await axios.get(`https://fakestoreapi.com/products/${id}`)
+                        this.products = res.data
+                
                 } catch(e){
                    this.error = e
                 } finally{
@@ -63,20 +63,26 @@ export const useProductsStore = defineStore('product', {
                 }
             },
 
-            async updateProduct(id) {
+            async updateProduct(id, product) {
                 try{
-                    this.products = await(fetch(`https://fakestoreapi.com/products/${id}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(this.products)
-                        })
-                        .then(response => response.json())
-                        .then(data => console.log(data))
-                        )
+
+                    const res = await axios.patch(`https://fakestoreapi.com/products/${id}`, product)
+                    const updated = res.data
+                    
+                    const index = this.products.findIndex(p => p.id === id)
+                    if(index !== -1){
+                        this.products[index] = updated
+    
+                    }
+                        
 
                         
                 } catch(e) {
-                    this.e = e
+                    // this.e = e
+
+                    if(e.res){
+                        console.log(e.res.data)
+                    }
                 }
                 finally{
                     this.isLoading = false
@@ -84,5 +90,5 @@ export const useProductsStore = defineStore('product', {
             }
 
             
-    }
+    }, persist: true
 })
