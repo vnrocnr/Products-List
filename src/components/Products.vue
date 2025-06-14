@@ -117,17 +117,33 @@
       <div class="text-center pa-4">
         <v-btn
           @click="dialog = true"
-          prepend-icon="mdi-plus"
+        
           class="bg-purple-darken-1 position-absolute right-0"
           >Add Product</v-btn
         >
+
         <v-dialog v-model="dialog" width="600">
+
+         
+
           <v-card
             max-width="auto"
-            prepend-icon="mdi-update"
-            text="Please be guided accordingly"
-            title="Add new Product Here"
+          
+         
+
+      
           >
+    <v-btn icon="mdi-close" 
+          size="small" 
+          class="bg-red-darken-1 d-flex position-absolute "
+          style="top: 20px; right: 35px;"
+          @click="dialog = false"
+          >
+      </v-btn>
+
+            <template #title>
+    <div class="w-100 ml-5 mt-10 text-h6 text-purple-darken-1">Add new Product Here</div>
+  </template>
             <AddProductForm
               @closeDialog="dialog = false"
               :addNewProduct="addProduct"
@@ -199,7 +215,7 @@
               </v-btn>
 
               <v-dialog v-model="updateFormDialog" width="auto">
-                <v-card width="500" prepend-icon="mdi-update" >
+                <v-card width="500"  >
                   <UpdateForm
                     :productData="selectedProduct"
                     :onUpdate="updateProduct"
