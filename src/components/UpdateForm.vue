@@ -1,8 +1,20 @@
-<template >
-  <v-card height="400" class="d-flex flex-column pa-4">
-    <h3>Update Item Details</h3>
-    <p>Item: {{ productData.title }}</p>
-    <v-form ref="form" @submit.prevent="submit" novalidate class="d-flex flex-column pa-10">
+<template v-slot:actions >
+
+
+    
+     <form @submit.prevent="submit" height="800"  class="d-flex position-relative flex-column pa-10" >
+
+      <v-btn icon="mdi-close" 
+      size="small" 
+      class="bg-red-darken-1 d-flex position-absolute "
+      style="top: 10px; right: 20px;"
+      @click="$emit('closeDialog')"
+      >
+
+      </v-btn>
+      <h3>Update Item Details</h3>
+      
+
       <v-text-field
         v-model="title.value.value"
          :error-messages="title.errorMessage.value"
@@ -19,6 +31,13 @@
          :error-messages="description.errorMessage.value"
         label="Description"
       ></v-text-field>
+        <v-text-field
+      v-model="image.value.value"
+      :error-messages="image.errorMessage.value"
+      label="Image URL"
+      placeholder="https://example.com"
+    ></v-text-field>
+
       <v-select
         v-model="category.value.value"
          :error-messages="category.errorMessage.value"
@@ -50,8 +69,10 @@
     </v-btn>
     </div>
      
-    </v-form>
-  </v-card>
+  </form>
+
+
+    
 </template>
 
 <script setup>
@@ -71,7 +92,7 @@ const props = defineProps({
 
 const emit = defineEmits([
   'updateProductData',
-  'update:dialogVisible'
+  'closeDialog'
 ])
 
 const categories = [
@@ -106,6 +127,15 @@ return true
          if (!value || value.length < 10) return 'Description too short'
       return true
       },
+
+          image(value) {
+     try{
+        new URL(value)
+        return true
+     } catch{
+        return 'Must be a valid url'
+     }
+    },
       category (value) {
         if (!value) return 'Category required'
       return true
@@ -113,7 +143,6 @@ return true
     },
   })
 
-  const form = ref()
    
         const category = useField('category', undefined, {
             initialValue: props.productData.category
@@ -126,6 +155,9 @@ return true
         })
         const description = useField('description', undefined, {
             initialValue: props.productData.description
+        })
+          const image = useField('image', undefined, {
+            initialValue: props.productData.image
         })
 
 
@@ -140,10 +172,12 @@ return true
             category: values.category,
             rate: props.productData.rating?.rate,
             image: props.productData.image,
-            
+           
+             
         })
-   
-        emit('update:dialogVisible', false)
+     
+                emit('closeDialog')
+      
         } catch (e){
             return e
         }
