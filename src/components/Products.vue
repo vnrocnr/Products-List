@@ -128,10 +128,10 @@
             text="Please be guided accordingly"
             title="Add new Product Here"
           >
-            <AddProductForm 
-              @closeDialog="dialog=false"
+            <AddProductForm
+              @closeDialog="dialog = false"
               :addNewProduct="addProduct"
-              />
+            />
           </v-card>
         </v-dialog>
       </div>
@@ -184,39 +184,40 @@
             ({{ product.rating?.count ?? "0" }})
           </td>
           <td>
-            <!-- Start of Update Product Container -->
 
-            <v-card class="d-flex ga-2" height="35" width="60" variant="flat">
-              <v-dialog max-width="500">
-                <template v-slot:activator="{ props: activatorProps }">
-                  <v-btn
-                    height="25"
-                    width="25"
-                    icon="mdi-pencil"
-                    size="x-small"
-                    class="bg-purple-darken-1"
-                    v-bind="activatorProps"
-                  >
-                  </v-btn>
-                </template>
-
-                <UpdateForm
-                  v-model:dialogVisible="dialog"
-                  :productData="product"
-                  :onUpdate="updateProduct"
-                />
-              </v-dialog>
+            <div class="options d-flex ga-2 align-center justify-center">
+                <div class="text-center pa-4"  height="25"
+                width="25">
               <v-btn
+                @click="onUpdateForm(product)"
+                size="x-small"
                 height="25"
                 width="25"
-                icon="mdi-trash-can-outline"
-                size="x-small"
-                class="bg-purple-lighten-5"
+                icon="mdi-pencil"
+                   class="bg-purple-darken-1"
               >
               </v-btn>
-            </v-card>
 
-            <!-- End of Add Product Container -->
+              <v-dialog v-model="updateFormDialog" width="auto">
+                <v-card width="500" prepend-icon="mdi-update" >
+                  <UpdateForm
+                    :productData="selectedProduct"
+                    :onUpdate="updateProduct"
+                         @closeDialog="updateFormDialog = false"
+                  />
+                </v-card>
+              </v-dialog>
+            </div>
+            <v-btn
+              height="25"
+              width="25"
+              icon="mdi-trash-can-outline"
+              size="x-small"
+              class="bg-purple-lighten-5"
+            >
+            </v-btn>
+            </div>
+          
           </td>
         </tr>
       </tbody>
@@ -233,17 +234,25 @@ import UpdateForm from "./UpdateForm.vue";
 import AddProductForm from "./AddProductForm.vue";
 
 // const { products, e, loading } = storeToRefs(useProductsStore());
-const {  header, filteredProducts, searchFilter } =
-  storeToRefs(useProductsStore());
-const { fetchProducts, fetchProduct, updateProduct, addProduct } = useProductsStore();
+const { header, filteredProducts, searchFilter } = storeToRefs(
+  useProductsStore()
+);
+const { fetchProducts, fetchProduct, updateProduct, addProduct } =
+  useProductsStore();
 
 fetchProducts();
 
-
-
 const dialog = ref(false);
+const updateFormDialog = ref(false);
+const selectedProduct = ref(null)
+
+const onUpdateForm = (product) => {
+    selectedProduct.value = product;
+    updateFormDialog.value = true
+}
+
+
 onMounted(() => {
   // console.log(filteredProducts);
-
 });
 </script>
