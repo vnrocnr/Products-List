@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/vnrocnr/Products-List/compare/v0.0.2...v0.0.5) (2025-06-15)
+
+
+### Features
+
+* add landing page for the  grid view of products list ([92d534b](https://github.com/vnrocnr/Products-List/commit/92d534bed8f5ada99b233344412a0c2a2adc26fb))
+* add search page structure, to be wired up later ([9e93974](https://github.com/vnrocnr/Products-List/commit/9e93974b2c72ec66c4d01ff8e590ee60868f6d3c))
+* dynamically render navigation items using v-for with route links ([8f5c68e](https://github.com/vnrocnr/Products-List/commit/8f5c68e7cba36bc7bf8faf5d33fcb1c75391c1fa))
+* implement close button for Update Form ([6830d81](https://github.com/vnrocnr/Products-List/commit/6830d81b5e0b0d6884fe683f75a1071af9a5aca8))
+* implement close button in Add new product form ([54ad41d](https://github.com/vnrocnr/Products-List/commit/54ad41d75c061fb469e9b5fd54fb0eb2e8fa182e))
+* implement Create product functionality ([a49a85a](https://github.com/vnrocnr/Products-List/commit/a49a85a7b0bc8030c5f2a9c7e04110b362b172c3))
+* implement data fetching, dashboard layout, and integrate search and initial view functionality ([32e0133](https://github.com/vnrocnr/Products-List/commit/32e0133671dc7e0ff35437471aa5d993e8f97500))
+* implement DELETE functionality by product ID ([b41e778](https://github.com/vnrocnr/Products-List/commit/b41e778d2deba8aaffa643d69608b4ec66d6e373))
+* implement search functionality by product ID ([a102b2b](https://github.com/vnrocnr/Products-List/commit/a102b2bf9cced4ff5503963a94d907cc23add199))
+* implement search functionality by product ID ([b414421](https://github.com/vnrocnr/Products-List/commit/b4144218688847f20dc6c1a15ab9665f8ae91156))
+* implement Update functionality ([7464e16](https://github.com/vnrocnr/Products-List/commit/7464e169a2e9dd45646da1a8beb94f011b6cf3fc))
+* implemented initial layout with header, sidebar, and main section ([b96a715](https://github.com/vnrocnr/Products-List/commit/b96a715f214f563b9eba398f99ec2a4b0e0c6b6d))
+* set-up basic routing for the app ([a6f9852](https://github.com/vnrocnr/Products-List/commit/a6f98526686fa14825838472b41fe1649a3dfb16))
+* **store:** enable persisted state for product store ([4ae9579](https://github.com/vnrocnr/Products-List/commit/4ae95797fab0e7e3a903e4c345df8e34ab8f67cb))
+
+
+### Bug Fixes
+
+* ensure correct product data is passed to update dialog ([ceb6b5e](https://github.com/vnrocnr/Products-List/commit/ceb6b5e11311f68c83f6c78f19a077216d819f27))
+* handle selected product via query param to support update and delete form dialog behavior ([29642e4](https://github.com/vnrocnr/Products-List/commit/29642e4ff719ef9d07d38b9ddd20885baa453ee0))
+* resolve data binding and submission issue in update form ([5482023](https://github.com/vnrocnr/Products-List/commit/5482023cc0a98227dc75bab74650163af438ee12))
+* resolve issue where update form doesn't close when submit button is click ([6cadb6d](https://github.com/vnrocnr/Products-List/commit/6cadb6d6fec7e58e46db4b6e3738b1f119b11240))
+* resolve layout conflict between <v-main> and Vue main by deleting initial margin in main css file ([77d41f1](https://github.com/vnrocnr/Products-List/commit/77d41f121e7e453afa118a0aea96c76906da1351))
+
 ### [0.0.4](https://github.com/vnrocnr/Products-List/compare/v0.0.2...v0.0.4) (2025-06-15)
 
 
