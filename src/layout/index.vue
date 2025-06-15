@@ -14,22 +14,27 @@
 
         <v-divider></v-divider>
 
-        <v-list density="compact">
           <v-list-item
-            prepend-icon="mdi-cart-outline"
-            title="Cart"
-          ></v-list-item>
-        </v-list>
-        <v-list-item to="/products" exact selected   >
-            <v-btn prepend-icon="mdi-store-edit-outline" block>Products</v-btn>
-        </v-list-item>
+            v-for="route in routes"
+            :key="route.name"
+            :to="route.to"
+          >
+
+          <v-btn   :prepend-icon="`${ route.icon }`" block>
+    {{ route.name }}
+
+          </v-btn>
+          
+          </v-list-item>
+
+       
   
       </v-list>
     </v-navigation-drawer>
 
     <v-main>
       <v-container>
-        <h1>Products List</h1>
+      
         <router-view />
       </v-container>
     </v-main>
@@ -38,4 +43,13 @@
 
 <script setup>
 import user from "@/assets/icons/user.svg";
+
+const routes = [
+  {
+    name:'Home', to:'/', icon:'mdi-home'
+  },
+  {
+    name:'Products', to:'/products', icon:'mdi-store-edit'
+  },
+]
 </script>
