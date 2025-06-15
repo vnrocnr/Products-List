@@ -133,9 +133,9 @@ export const useProductsStore = defineStore('product', {
                         const res = await axios.delete( `https://fakestoreapi.com/products/${id} `)
                         
                         const deletedProduct = res.data
-                        const index = this.products.find(p => p.id === id)
-                        
-                        this.products[index] = deletedProduct
+                    
+               
+                        this.products =   this.products.filter(p => p.id !== deletedProduct.id)
                     } catch(e){
                             if(e.response){
                         console.log(e.response.data)

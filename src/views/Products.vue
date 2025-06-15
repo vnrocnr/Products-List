@@ -139,22 +139,48 @@
                       :onUpdate="updateProduct"
                       @closeDialog="updateFormDialog = false"
                     />
+
+
+
+
+
                   </v-card>
                 </v-dialog>
               </div>
               <!-- End of Update Functionality -->
 
-              <!-- Start of Update Functionality -->
-              <v-btn
-                height="25"
-                width="25"
-                icon="mdi-trash-can-outline"
-                size="x-small"
-                class="bg-purple-lighten-5"
-              >
-              </v-btn>
+              <!-- Start of Delete Functionality -->
 
-              <!-- End of Update Functionality -->
+              <div class="text-center pa-4" height="25" width="25">
+                
+                    <v-btn
+                    
+                      height="25"
+                      width="25"
+                      icon="mdi-trash-can-outline"
+                      size="x-small"
+                      class="bg-purple-lighten-5"
+                        @click="handleDelete(product)"
+                    >
+                    </v-btn>
+
+                    <v-dialog v-model="deleteDialog" width="auto">
+                        <v-card width="500">
+                      
+
+                            <DeleteDialog  
+                                @closeDialog="deleteDialog = false"
+                                :selectedProduct="selectedProduct"
+                                :delete-item="deleteProduct"
+                            />
+
+                        </v-card>
+                      </v-dialog>
+
+
+              </div>
+            
+              <!-- End of Delete Functionality -->
             </div>
           </td>
         </tr>
@@ -170,6 +196,7 @@ import { useProductsStore } from "@/stores/products";
 import { storeToRefs } from "pinia";
 import UpdateForm from "@/components/UpdateForm.vue";
 import AddProductForm from "@/components/AddProductForm.vue";
+import DeleteDialog from "@/components/DeleteDialog.vue";
 import ProductDetails from "@/components/ProductDetails.vue";
 // const { products, e, loading } = storeToRefs(useProductsStore());
 const { header, combinedFiltered, filteredProducts, searchFilter, idFilter } = storeToRefs(
@@ -191,7 +218,7 @@ const dialog = ref(false);
 const updateFormDialog = ref(false);
 
 const selectedProduct = ref();
-const readDialog = ref(false);
+const deleteDialog = ref(false);
 
 const handleSelectedProduct = (product) => {
   selectedProduct.value = { ...product };
@@ -199,6 +226,11 @@ const handleSelectedProduct = (product) => {
   updateFormDialog.value = true;
  
 };
+
+const handleDelete = (product) => {
+  selectedProduct.value = product.id;
+  deleteDialog.value = true
+}
 
 
 onMounted(() => {
