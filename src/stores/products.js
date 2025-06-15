@@ -27,6 +27,7 @@ export const useProductsStore = defineStore('product', {
            },
 
            filteredProducts: (state) => {
+
                 if(!state.searchFilter) return state.products
 
                 return state.products.filter(product => product.title.toLowerCase().includes(state.searchFilter.toLowerCase()))
@@ -40,10 +41,12 @@ export const useProductsStore = defineStore('product', {
     actions: {
             async fetchProducts() {
                     this.products =[]
-
+                   
                 try{    
                     const res =  await axios.get('https://fakestoreapi.com/products')
                         this.products = res.data
+                        // localStorage.setItem('productLists ', JSON.stringify(res.data))
+
                 } catch(e){
                         this.error = e
                 } finally{
@@ -54,8 +57,8 @@ export const useProductsStore = defineStore('product', {
             async fetchProduct(id) {
                 try{
                     const res =await axios.get(`https://fakestoreapi.com/products/${id}`)
-                        this.products = res.data
-                
+                        this.products = [res.data]
+                       
                 } catch(e){
                    this.error = e
                 } finally{
@@ -63,27 +66,50 @@ export const useProductsStore = defineStore('product', {
                 }
             },
 
+            async addProduct(product) {
+                    try{
+                        
+                        const res = await axios.post('https://fakestoreapi.com/products', product)
+                        
+                        this.products.push(res.data)
+                        // console.log(res)
+                    }catch(e){
+                        this.error = e
+                    }finally{
+                            this.isLoading =false
+                    }
+            },
+
             async updateProduct(id, product) {
                 try{
-
-                    const res = await axios.put(`https://fakestoreapi.com/products/${id}`, product)
+                             const payload = {
+                                     id: id,
+                                    title: product.title,
+                                    price: product.price,
+                                    description: product.description,
+                                    category: product.category,
+                                    image: product.image,
+                                    };
+                    const res = await axios.put(`https://fakestoreapi.com/products/${id}`, payload)
                     const updated = res.data
                     
                     const index = this.products.findIndex(p => p.id === id)
                     if(index !== -1){
-                           updatedData.rating = this.products[index].rating ?? { rate: 0, count: 0 }
+                           updated.rating = this.products[index].rating ?? { rate: 0, count: 0 }
 
                         this.products[index] = updated
     
                     }
-                        console.log(updated)
+                    
 
                         
                 } catch(e) {
                     // this.e = e
 
-                    if(e.res){
-                        console.log(e.res.data)
+                    if(e.response){
+                        console.log(e.response.data)
+                    }else{
+                        console.log(e.message)
                     }
                 }
                 finally{
