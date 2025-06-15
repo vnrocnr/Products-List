@@ -33,7 +33,7 @@
       ></v-text-field>
 
         
-      <v-sheet height="48" rounded="0" color="success" variant="flat" @click="fetchProduct" class="d-flex justify-center align-center text-uppercase px-2">
+      <v-sheet height="48" rounded="0"  variant="flat" @click="fetchProduct" class="d-flex justify-center align-center text-uppercase px-2 bg-purple-darken-3">
         <p class="font-weight-bold">search by id </p> 
       </v-sheet>
       </div>
@@ -43,7 +43,7 @@
       <div class="text-center pa-4">
         <v-btn
           @click="dialog = true"
-          class="bg-purple-darken-1 position-absolute right-0"
+          class="bg-orange-darken-1 position-absolute right-0"
           >Add Product</v-btn
         >
 
@@ -59,7 +59,7 @@
             </v-btn>
 
             <template #title>
-              <div class="w-100 ml-5 mt-10 text-h6 text-purple-darken-1">
+              <div class="w-100 ml-5 mt-10 text-h6 text-orange-darken-1">
                 Add new Product Here
               </div>
             </template>
@@ -128,7 +128,7 @@
                   height="25"
                   width="25"
                   icon="mdi-pencil"
-                  class="bg-purple-darken-1"
+                  class="bg-orange-darken-1"
                 >
                 </v-btn>
 
@@ -137,7 +137,7 @@
                     <UpdateForm
                       :productData="selectedProduct"
                       :onUpdate="updateProduct"
-                      @closeDialog="updateFormDialog = false"
+                      @closeDialog="updateFormDialog = false, router.push({query:{}})"
                     />
 
 
@@ -159,7 +159,7 @@
                       width="25"
                       icon="mdi-trash-can-outline"
                       size="x-small"
-                      class="bg-purple-lighten-5"
+                      class="bg-orange-lighten-5"
                         @click="handleDelete(product)"
                     >
                     </v-btn>
@@ -169,9 +169,9 @@
                       
 
                             <DeleteDialog  
-                                @closeDialog="deleteDialog = false"
+                                @closeDialog="deleteDialog = false, router.push({query: {}})"
                                 :selectedProduct="selectedProduct"
-                                :delete-item="deleteProduct"
+                                :delete-item="deleteProduct "
                             />
 
                         </v-card>
@@ -197,8 +197,13 @@ import { storeToRefs } from "pinia";
 import UpdateForm from "@/components/UpdateForm.vue";
 import AddProductForm from "@/components/AddProductForm.vue";
 import DeleteDialog from "@/components/DeleteDialog.vue";
+import { useRouter } from "vue-router";
+
 import ProductDetails from "@/components/ProductDetails.vue";
 // const { products, e, loading } = storeToRefs(useProductsStore());
+
+
+const router = useRouter()
 const { header, combinedFiltered, filteredProducts, searchFilter, idFilter } = storeToRefs(
   useProductsStore()
 );
@@ -224,12 +229,15 @@ const handleSelectedProduct = (product) => {
   selectedProduct.value = { ...product };
   // console.log(product)
   updateFormDialog.value = true;
+  router.push({query: {id: selectedProduct.value.id}})
  
 };
 
 const handleDelete = (product) => {
   selectedProduct.value = product.id;
   deleteDialog.value = true
+
+  router.push({query: {id: selectedProduct.value}})
 }
 
 
