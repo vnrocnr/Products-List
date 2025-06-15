@@ -1,4 +1,4 @@
-import Products from '@/components/Products.vue'
+import Products from '@/views/Products.vue'
 import  {defineStore} from 'pinia'
 import axios from "axios";
 
@@ -57,8 +57,8 @@ export const useProductsStore = defineStore('product', {
             async fetchProduct(id) {
                 try{
                     const res =await axios.get(`https://fakestoreapi.com/products/${id}`)
-                        this.products = [res.data]
-                       
+                        this.products = res.data
+                    //    console.log(res.data)
                 } catch(e){
                    this.error = e
                 } finally{
@@ -116,6 +116,25 @@ export const useProductsStore = defineStore('product', {
                     this.isLoading = false
                 }
                 
+            },
+
+            async deleteProduct(id) {
+                    try{
+                        const res = await axios.delete( `https://fakestoreapi.com/products/${id} `)
+                        
+                        const deletedProduct = res.data
+                        const index = this.products.find(p => p.id === id)
+                        
+                        this.products[index] = deletedProduct
+                    } catch(e){
+                            if(e.response){
+                        console.log(e.response.data)
+                    }else{
+                        console.log(e.message)
+                    }
+                    } finally{
+                        this.isLoading = false
+                    }
             }
 
             
