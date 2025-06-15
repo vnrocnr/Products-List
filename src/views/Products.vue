@@ -1,104 +1,10 @@
 <template>
-  <!-- <v-card class="mx-auto">
-    <v-container fluid>
-      <v-row dense>
-        <v-col
-          v-for="product in products"
-          :key="product.id"
-          :cols="product.flex"
-          sm="6"
-          md="4"
-          lg="3"
-          >
-          <v-card
-            class="mx-auto flex justify-center items-center "
-            max-width="344"
-          >
-            <div class="d-flex justify-center">
-              <v-img
-                height="200px"
-                width="200"
-                :src="`${product.image}`"
-                cover
-              ></v-img>
-            </div>
-
-            <v-card-title>
-              {{ product.title }}
-            </v-card-title>
-
-            <div class="max-w-200px" >
-                  <v-card-subtitle style="max-width: 300px;">
-              {{ product.description }}
-            </v-card-subtitle>
-            </div>
-          
-            
-            
-            <v-card-text max-width="300">
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :model-value="4.5"
-          color="amber"
-          density="compact"
-          size="small"
-          half-increments
-          readonly
-        ></v-rating>
-
-        <div class="text-grey ms-4">
-          {{product.rating.rate}} ({{ product.rating.count }})
-        </div>
-      </v-row>
-
-      <div class="my-4 text-subtitle-1">
-        ${{ product.price }}
-      </div>
-
-   
-
-    </v-card-text>
-
-    <v-divider></v-divider>
-
-           
-
-
-            <v-card-actions class="bg-pink-lighten-3">
-              <v-spacer></v-spacer>
-
-              <v-btn
-                color="medium-emphasis"
-                icon="mdi-heart"
-                size="small"
-              ></v-btn>
-
-              <v-btn
-                color="medium-emphasis"
-                icon="mdi-bookmark"
-                size="small"
-              ></v-btn>
-
-              <v-btn
-                color="medium-emphasis"
-                icon="mdi-share-variant"
-                size="small"
-              ></v-btn>
-            </v-card-actions>
-          </v-card>
-          
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card> -->
+  
   <v-card class="d-flex flex-column gap-10 bg-indigo-lighten-3">
     <v-sheet
       height="80"
       variant="elevated"
-      class="d-flex justify-left pl-3 align-center position-relative rounded-b-full"
+      class="d-flex ga-3 justify-left pl-3 align-center position-relative rounded-b-full"
       width="auto"
     >
       <v-text-field
@@ -112,6 +18,26 @@
         style="max-width: 450px"
         density="comfortable"
       ></v-text-field>
+
+      <div class="idFilteredContainer d-flex flex-row justify-center align-center">
+         <v-text-field
+          v-model="idFilter"
+        label="ID"
+        rounded="0"
+        variant="outlined"
+        hide-details
+        single-line
+        color="primary"
+        style="max-width: 90px"
+        density="comfortable"
+      ></v-text-field>
+
+        
+      <v-sheet height="48" rounded="0" color="success" variant="flat" @click="fetchProduct" class="d-flex justify-center align-center text-uppercase px-2">
+        <p class="font-weight-bold">search by id </p> 
+      </v-sheet>
+      </div>
+     
 
       <!-- Start of Add Product Container -->
       <div class="text-center pa-4">
@@ -157,16 +83,13 @@
           >
             {{ p }}
 
-            <div class="btns d-flex flex-row">
-              <v-btn density="compact" icon="menu-up-outline">▲</v-btn>
-              <v-btn density="compact" icon="">▼</v-btn>
-            </div>
+           
           </th>
           <th scope="col">actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in filteredProducts" :key="product.id">
+        <tr v-for="product in combinedFiltered" :key="product.id">
           <td>{{ product.id }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.price }}</td>
@@ -179,6 +102,7 @@
               style="height: 100px; width: 100px"
             />
           </td>
+          
           <td>
             <v-rating
               :model-value="product.rating?.rate ?? 0"
@@ -194,29 +118,7 @@
           </td>
           <td>
             <div class="options d-flex align-center justify-center">
-              <!-- Start Read Functionality -->
-              <div class="text-center" height="25" width="25">
-                <v-btn
-                  @click="handleReadFunc(product)"
-                  size="x-small"
-                  height="25"
-                  width="25"
-                  icon="mdi-eye"
-                  class="bg-blue-darken-1"
-                >
-                </v-btn>
-
-                <v-dialog v-model="readDialog" width="auto">
-                  <v-card width="500">
-                    <ProductDetails
-                     :selectedProduct="selectedProduct" 
-                     @close-dialog="readDialog  = false"
-                     />
-                  </v-card>
-                </v-dialog>
-              </div>
-
-              <!-- End of Read Functionality -->
+             
 
               <!-- Start of Update Functionality -->
               <div class="text-center pa-4" height="25" width="25">
@@ -270,7 +172,7 @@ import UpdateForm from "@/components/UpdateForm.vue";
 import AddProductForm from "@/components/AddProductForm.vue";
 import ProductDetails from "@/components/ProductDetails.vue";
 // const { products, e, loading } = storeToRefs(useProductsStore());
-const { header, filteredProducts, searchFilter } = storeToRefs(
+const { header, combinedFiltered, filteredProducts, searchFilter, idFilter } = storeToRefs(
   useProductsStore()
 );
 const {
@@ -281,8 +183,10 @@ const {
   deleteProduct,
 } = useProductsStore();
 
+fetchProducts()
+fetchProduct()
 
-
+const productID = ref()
 const dialog = ref(false);
 const updateFormDialog = ref(false);
 
@@ -297,7 +201,10 @@ const handleSelectedProduct = (product) => {
 };
 
 // const handleReadFunc = (product) => {
-//     fetchProduct
+// fetchProduct(product.id)
+//      selectedProduct.value = product
+
+//     //  console.log(selectedProduct.value)
 //      readDialog.value = true
 // }
 
