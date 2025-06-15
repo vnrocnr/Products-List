@@ -1,4 +1,4 @@
-import Products from '@/views/Products.vue'
+import Products from '@/views/Products.vue';
 import  {defineStore} from 'pinia'
 import axios from "axios";
 
@@ -10,7 +10,9 @@ export const useProductsStore = defineStore('product', {
             products: [],
             error: null,
             isLoading: true,
-            searchFilter: ''
+            searchFilter: '',
+            idFilter: ''
+            
         }
     },
     getters: {
@@ -31,6 +33,25 @@ export const useProductsStore = defineStore('product', {
                 if(!state.searchFilter) return state.products
 
                 return state.products.filter(product => product.title.toLowerCase().includes(state.searchFilter.toLowerCase()))
+           },
+
+           idFiltered: (state) => {
+                if(!state.idFilter) return state.products
+
+                return state.products.filter(product => product.id.toString().includes(state.idFilter))
+           },
+
+           combinedFiltered: (state) => {
+                return state.products.filter((product) => {
+                    const searchFiltered = state.searchFilter ?  product.title.toLowerCase().includes(state.searchFilter.toLowerCase()) : true;
+                    const idFiltered = state.idFilter ? product.id.toString().includes(state.idFilter) : true;
+
+                    
+                         return searchFiltered && idFiltered
+                }) 
+
+             
+
            },
 
            limitDesc: (state) => {
@@ -58,7 +79,7 @@ export const useProductsStore = defineStore('product', {
                 try{
                     const res =await axios.get(`https://fakestoreapi.com/products/${id}`)
                         this.products = res.data
-                    //    console.log(res.data)
+                       
                 } catch(e){
                    this.error = e
                 } finally{
