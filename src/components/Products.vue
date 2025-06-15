@@ -117,33 +117,26 @@
       <div class="text-center pa-4">
         <v-btn
           @click="dialog = true"
-        
           class="bg-purple-darken-1 position-absolute right-0"
           >Add Product</v-btn
         >
 
         <v-dialog v-model="dialog" width="600">
-
-         
-
-          <v-card
-            max-width="auto"
-          
-         
-
-      
-          >
-    <v-btn icon="mdi-close" 
-          size="small" 
-          class="bg-red-darken-1 d-flex position-absolute "
-          style="top: 20px; right: 35px;"
-          @click="dialog = false"
-          >
-      </v-btn>
+          <v-card max-width="auto">
+            <v-btn
+              icon="mdi-close"
+              size="small"
+              class="bg-red-darken-1 d-flex position-absolute"
+              style="top: 20px; right: 35px"
+              @click="dialog = false"
+            >
+            </v-btn>
 
             <template #title>
-    <div class="w-100 ml-5 mt-10 text-h6 text-purple-darken-1">Add new Product Here</div>
-  </template>
+              <div class="w-100 ml-5 mt-10 text-h6 text-purple-darken-1">
+                Add new Product Here
+              </div>
+            </template>
             <AddProductForm
               @closeDialog="dialog = false"
               :addNewProduct="addProduct"
@@ -200,40 +193,37 @@
             ({{ product.rating?.count ?? "0" }})
           </td>
           <td>
-
             <div class="options d-flex ga-2 align-center justify-center">
-                <div class="text-center pa-4"  height="25"
-                width="25">
+              <div class="text-center pa-4" height="25" width="25">
+                <v-btn
+                  @click="handleSelectedProduct(product)"
+                  size="x-small"
+                  height="25"
+                  width="25"
+                  icon="mdi-pencil"
+                  class="bg-purple-darken-1"
+                >
+                </v-btn>
+
+                <v-dialog v-model="updateFormDialog" width="auto">
+                  <v-card width="500">
+                    <UpdateForm
+                      :productData="selectedProduct"
+                      :onUpdate="updateProduct"
+                      @closeDialog="updateFormDialog = false"
+                    />
+                  </v-card>
+                </v-dialog>
+              </div>
               <v-btn
-                @click="onUpdateForm(product)"
-                size="x-small"
                 height="25"
                 width="25"
-                icon="mdi-pencil"
-                   class="bg-purple-darken-1"
+                icon="mdi-trash-can-outline"
+                size="x-small"
+                class="bg-purple-lighten-5"
               >
               </v-btn>
-
-              <v-dialog v-model="updateFormDialog" width="auto">
-                <v-card width="500"  >
-                  <UpdateForm
-                    :productData="selectedProduct"
-                    :onUpdate="updateProduct"
-                         @closeDialog="updateFormDialog = false"
-                  />
-                </v-card>
-              </v-dialog>
             </div>
-            <v-btn
-              height="25"
-              width="25"
-              icon="mdi-trash-can-outline"
-              size="x-small"
-              class="bg-purple-lighten-5"
-            >
-            </v-btn>
-            </div>
-          
           </td>
         </tr>
       </tbody>
@@ -242,7 +232,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {  ref } from "vue";
 import { onMounted } from "vue";
 import { useProductsStore } from "@/stores/products";
 import { storeToRefs } from "pinia";
@@ -260,13 +250,14 @@ fetchProducts();
 
 const dialog = ref(false);
 const updateFormDialog = ref(false);
-const selectedProduct = ref(null)
+const selectedProduct = ref()
 
-const onUpdateForm = (product) => {
-    selectedProduct.value = product;
+
+const handleSelectedProduct = (product) => {
+    selectedProduct.value = {...product}
+    // console.log(product)
     updateFormDialog.value = true
 }
-
 
 onMounted(() => {
   // console.log(filteredProducts);
