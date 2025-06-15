@@ -1,9 +1,10 @@
 <script setup>
-import products from '@/views/Products.vue';
+// import products from '@/views/Products.vue';
+import LandingPage from './LandingPage.vue';
 </script>
 
 <template>
  <v-container>
-        <products/>
+        <LandingPage/>
  </v-container>
 </template>
