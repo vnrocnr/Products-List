@@ -198,10 +198,10 @@ import UpdateForm from "@/components/UpdateForm.vue";
 import AddProductForm from "@/components/AddProductForm.vue";
 import DeleteDialog from "@/components/DeleteDialog.vue";
 import { useRouter } from "vue-router";
-
+import Swal from 'sweetalert2';
 import ProductDetails from "@/components/ProductDetails.vue";
-// const { products, e, loading } = storeToRefs(useProductsStore());
 
+// const { products, e, loading } = storeToRefs(useProductsStore());
 
 const router = useRouter()
 const { header, combinedFiltered, filteredProducts, searchFilter, idFilter } = storeToRefs(
@@ -235,9 +235,40 @@ const handleSelectedProduct = (product) => {
 
 const handleDelete = (product) => {
   selectedProduct.value = product.id;
-  deleteDialog.value = true
+  // deleteDialog.value = true
 
-  router.push({query: {id: selectedProduct.value}})
+  // router.push({query: {id: selectedProduct.value}})
+
+ Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+if (result.isConfirmed) {
+    try{
+        deleteProduct(selectedProduct.value)
+
+   
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+  
+    
+
+    } catch(e){
+      console.log(e)
+    } 
+     }
+   
+
+});
 }
 
 
