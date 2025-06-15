@@ -72,7 +72,7 @@
       </div>
       <!-- End of Add Product Container -->
     </v-sheet>
-    <v-table height="650px" width="700px" class="d-flex" fixed-header>
+    <v-table height="750px" width="700px" class="d-flex" fixed-header>
       <thead>
         <tr class="text-uppercase">
           <th
@@ -184,7 +184,7 @@ const {
 } = useProductsStore();
 
 fetchProducts()
-fetchProduct()
+
 
 const productID = ref()
 const dialog = ref(false);
@@ -200,13 +200,6 @@ const handleSelectedProduct = (product) => {
  
 };
 
-// const handleReadFunc = (product) => {
-// fetchProduct(product.id)
-//      selectedProduct.value = product
-
-//     //  console.log(selectedProduct.value)
-//      readDialog.value = true
-// }
 
 onMounted(() => {
   // console.log(filteredProducts);

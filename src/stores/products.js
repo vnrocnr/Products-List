@@ -11,7 +11,8 @@ export const useProductsStore = defineStore('product', {
             error: null,
             isLoading: true,
             searchFilter: '',
-            idFilter: ''
+            idFilter: '',
+            limitDescription: ''
             
         }
     },
@@ -54,8 +55,8 @@ export const useProductsStore = defineStore('product', {
 
            },
 
-           limitDesc: (state) => {
-                return state.products.filter(x => x.category)
+           updatedDescription: (state) => {
+                return this.product
            }
     },
 
@@ -70,18 +71,6 @@ export const useProductsStore = defineStore('product', {
 
                 } catch(e){
                         this.error = e
-                } finally{
-                    this.isLoading = false
-                }
-            },
-
-            async fetchProduct(id) {
-                try{
-                    const res =await axios.get(`https://fakestoreapi.com/products/${id}`)
-                        this.products = res.data
-                       
-                } catch(e){
-                   this.error = e
                 } finally{
                     this.isLoading = false
                 }
