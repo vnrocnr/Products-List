@@ -237,7 +237,7 @@ const handleDelete = (product) => {
   selectedProduct.value = product.id;
   // deleteDialog.value = true
 
-  // router.push({query: {id: selectedProduct.value}})
+  router.push({query: {id: selectedProduct.value}})
 
  Swal.fire({
   title: "Are you sure?",
@@ -249,7 +249,9 @@ const handleDelete = (product) => {
   confirmButtonText: "Yes, delete it!"
 }).then((result) => {
 if (result.isConfirmed) {
+
     try{
+      
         deleteProduct(selectedProduct.value)
 
    
@@ -260,12 +262,13 @@ if (result.isConfirmed) {
           icon: "success"
         });
   
-    
+    router.push({query: {}})
 
     } catch(e){
       console.log(e)
     } 
      }
+       router.push({query: {}})
    
 
 });
