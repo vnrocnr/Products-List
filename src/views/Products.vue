@@ -8,7 +8,7 @@
       width="auto"
     >
       <v-text-field
-        v-model="searchFilter"
+        v-model="store.searchFilter"
         label="Search"
         prepend-inner-icon="mdi-magnify"
         variant="solo-filled"
@@ -21,7 +21,7 @@
 
       <div class="idFilteredContainer d-flex flex-row justify-center align-center">
          <v-text-field
-          v-model="idFilter"
+          v-model="store.idFilter"
         label="ID"
         rounded="0"
         variant="outlined"
@@ -33,7 +33,7 @@
       ></v-text-field>
 
         
-      <v-sheet height="48" rounded="0"  variant="flat" @click="fetchProduct" class="d-flex justify-center align-center text-uppercase px-2 bg-purple-darken-3">
+      <v-sheet height="48" rounded="0"  variant="flat" @click="store.fetchProducts" class="d-flex justify-center align-center text-uppercase px-2 bg-purple-darken-3">
         <p class="font-weight-bold">search by id </p> 
       </v-sheet>
       </div>
@@ -65,7 +65,7 @@
             </template>
             <AddProductForm
               @closeDialog="dialog = false"
-              :addNewProduct="addProduct"
+              :addNewProduct="store.addProduct"
             />
           </v-card>
         </v-dialog>
@@ -78,7 +78,7 @@
           <th
             class="text-left"
             scope="col"
-            v-for="(p, index) in header"
+            v-for="(p, index) in store.header"
             :key="index"
           >
             {{ p }}
@@ -89,7 +89,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in combinedFiltered" :key="product.id">
+        <tr v-for="product in store.combinedFiltered" :key="product.id">
           <td>{{ product.id }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.price }}</td>
@@ -136,12 +136,9 @@
                   <v-card width="500">
                     <UpdateForm
                       :productData="selectedProduct"
-                      :onUpdate="updateProduct"
+                      :onUpdate="store.updateProduct"
                       @closeDialog="updateFormDialog = false, router.push({query:{}})"
                     />
-
-
-
 
 
                   </v-card>
@@ -171,7 +168,7 @@
                             <DeleteDialog  
                                 @closeDialog="deleteDialog = false, router.push({query: {}})"
                                 :selectedProduct="selectedProduct"
-                                :delete-item="deleteProduct "
+                                :delete-item="store.deleteProduct "
                             />
 
                         </v-card>
@@ -190,8 +187,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { onMounted } from "vue";
+import { ref, onMounted, watch, reactive } from "vue";
+
 import { useProductsStore } from "@/stores/products";
 import { storeToRefs } from "pinia";
 import UpdateForm from "@/components/UpdateForm.vue";
@@ -204,18 +201,20 @@ import ProductDetails from "@/components/ProductDetails.vue";
 // const { products, e, loading } = storeToRefs(useProductsStore());
 
 const router = useRouter()
-const { header, combinedFiltered, filteredProducts, searchFilter, idFilter } = storeToRefs(
-  useProductsStore()
-);
-const {
-  fetchProducts,
-  fetchProduct,
-  updateProduct,
-  addProduct,
-  deleteProduct,
-} = useProductsStore();
+// const { header, combinedFiltered, filteredProducts, searchFilter, idFilter, locallyStored, products } = storeToRefs(
+//   useProductsStore()
+// );
+// const {
+//   fetchProducts,
+//   fetchProduct,
+//   updateProduct,
+//   addProduct,
+//   deleteProduct,
+// } = useProductsStore();
 
-fetchProducts()
+
+const store = useProductsStore()
+const locallyStored = ref([])
 
 
 const productID = ref()
@@ -252,9 +251,8 @@ if (result.isConfirmed) {
 
     try{
       
-        deleteProduct(selectedProduct.value)
+        store.deleteProduct(selectedProduct.value)
 
-   
 
         Swal.fire({
           title: "Deleted!",
@@ -274,8 +272,13 @@ if (result.isConfirmed) {
 });
 }
 
+// watch(store.products, (newVal) => {
+//     localStorage.setItem('productList', newVal)
+// })
 
 onMounted(() => {
-  // console.log(filteredProducts);
+store.fetchProducts()
+
+
 });
 </script>
