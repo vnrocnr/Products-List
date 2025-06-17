@@ -14,7 +14,7 @@ export const useProductsStore = defineStore(
     const limitDescription = ref("");
     const totalAddedProduct = ref(0);
     const totalRemovedProduct = ref(0);
-    const menClothing = ref(0);
+    const newID = ref(0);
 
     const totalPerCategory = computed(() => {
       const counts = {};
@@ -105,20 +105,37 @@ export const useProductsStore = defineStore(
       }
     };
 
-    const addProduct = async (product) => {
-      try {
-        const res = await axios.post(
-          "https://fakestoreapi.com/products",
-          product
-        );
+    const lastID = computed(() => {
+       if (!products.value.length) return 1;
+     return Math.max(...products.value.map(p => p.id || 0)) 
+    })
 
-       
-       
+    const addProduct = async (product) => {
+
+      const newID = lastID.value + 1
+      try {
+
+      
+                  const payload = {
+               id: newID,
+          title: product.title,
+          price: product.price,
+          description: product.description,
+          category: product.category,
+          image: product.image,
+        };
+    
+      const res =  await axios.post( "https://fakestoreapi.com/products", payload);
+
+ 
         const productWithRating = {
               ...res.data,
+              id: newID,
               rating: res.data.rating ?? {rate: 0, count: 0}
         }
         products.value.push(productWithRating);
+
+        console.log(productWithRating)
         saveToLocalStorage();
     
       } catch (e) {
@@ -129,9 +146,12 @@ export const useProductsStore = defineStore(
     };
 
     const updateProduct = async (id, product) => {
+    
       try {
+
+    
         const payload = {
-          id,
+          id: payload.id,
           title: product.title,
           price: product.price,
           description: product.description,
@@ -143,6 +163,7 @@ export const useProductsStore = defineStore(
 
         const index = products.value.findIndex((p) => p.id === id);
         if (index !== -1) {
+      
           const existingRating = products.value[index].rating ?? {
             rate: 0,
             count: 0,
@@ -202,6 +223,7 @@ export const useProductsStore = defineStore(
       totalRemovedProduct,
       totalPerCategory,
       topItems,
+      lastID
     };
   },
   {
