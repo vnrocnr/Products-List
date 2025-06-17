@@ -1,99 +1,54 @@
-<template>
-  <div class="container d-flex">
 
-     <v-container  >
-    <v-row no-gutters
-   class="ga-2 "
+  
+  <template class="bg-grey-darken-2">
+  
+  
+  <h1>Overview</h1>
 
-    >
+  <v-container class="">
+    <v-row no-gutters>
       <v-col
-        v-for="product in products"
-        :key="product.id"
+        v-for="n in values"
+        :key="n.title"
         cols="12"
-        sm="5"
-        md="4"
-        lg="3"
-      variant="tonal"
-      style="max-width: 350px;"
-
+        sm="4"
+     
       >
-        <template v-slot:loader="{ isActive }">
-      <v-progress-linear
-        :active="isActive"
-        color="deep-purple"
-        height="4"
-        indeterminate
-      ></v-progress-linear>
-    </template>
+   
+        <v-sheet :title="n.title" :class="`ma-2 pa-2 ${n.bg} rounded-lg`" height="100">
+            <h2 class="text-white">  {{ n.title }} </h2>
+            <p class="text-lg">{{ n.data }}</p>
+        </v-sheet>
 
-    <v-img
-      height="250"
-      :src="product.image"
-      cover
-    ></v-img>
-
-    <v-card-item>
-      <v-card-title>{{ product.title }}</v-card-title>
-
-      <v-card-subtitle>
-        <span class="me-1">Local Favorite</span>
-
-        <v-icon
-          color="error"
-          icon="mdi-fire-circle"
-          size="small"
-        ></v-icon>
-      </v-card-subtitle>
-    </v-card-item>
-
-    <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :model-value="`${product.rating?.rate}`"
-          color="amber"
-          density="compact"
-          size="small"
-          half-increments
-          readonly
-        ></v-rating>
-
-        <div class="text-grey ms-4">
-          {{ product.rating?.rate }} ({{ product.rating?.count }})
-        </div>
-      </v-row>
-
-      <div class="my-4 text-subtitle-1">
-        ${{ product.price }} • Italian, Cafe
-      </div>
-
-      <div>{{product.description}}</div>
-    </v-card-text>
-
+      
       </v-col>
+
+
+      
     </v-row>
   </v-container>
 
-  </div>
-  
+  <v-card height="620" >
+<h1 class="ml-3">Sales Analytics</h1>
+      <BarChart/>
+  </v-card>
 </template>
 
+
 <script setup>
- import { useProductsStore } from '@/stores/products'
-import { ref,  onMounted } from 'vue'
-import {storeToRefs } from 'pinia'
- const {products} = storeToRefs(useProductsStore()) 
+import BarChart from '@/components/Chart.vue';
+import { useProductsStore } from '@/stores/products';
 
-  const loading = ref(false)
-  const selection = ref(1)
-  function reserve () {
-    loading.value = true
-    setTimeout(() => (loading.value = false), 2000)
-  }
-
-  onMounted(() => {
-    console.log(products)
-  })
+const store = useProductsStore()
+const values = [{
+    title: 'Total Products', bg:'bg-purple-darken-3', data: store.totalProducts 
+}, {
+  title: 'Total Added', bg:'bg-orange-darken-1', data: store.totalAddedProduct
+}, {
+  title: 'Total Sales', bg:'bg-amber-darken-4', data:1.2 + 'M'
+}
+ ]
+// {
+//   title: 'Total Removed', bg:'bg-pink-lighten-4', data:store.totalRemovedProduct
+// }
 </script>
