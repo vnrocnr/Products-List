@@ -76,13 +76,13 @@ export const useProductsStore = defineStore(
     const ratingAverage = computed(() => {});
 
     const topItems = computed(() => {
-     return  products.value.filter(m => m.rating.rate >= 4.5).sort((a, b) => {
-          return b.rating.rate - a.rating.rate
-     }).map(p => ({
+     return  products.value.filter(m => m.rating.rate >= 4.5).sort((a,b) =>{
+      return b.rating.rate - a.rating.rate
+     }   
+    ).map(p => ({
         title: p.title,
         rate: p.rating.rate
-     })
-    )
+    }))
 
     })
 
@@ -112,10 +112,15 @@ export const useProductsStore = defineStore(
           product
         );
 
-        products.value.push(res.data);
-        // console.log(res)
+       
+       
+        const productWithRating = {
+              ...res.data,
+              rating: res.data.rating ?? {rate: 0, count: 0}
+        }
+        products.value.push(productWithRating);
         saveToLocalStorage();
-        totalAddedProduct.value++;
+    
       } catch (e) {
         error.value = e;
       } finally {
