@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/vnrocnr/Products-List/compare/v0.0.5...v0.0.6) (2025-06-17)
+
+
+### Features
+
+* **charts:** implement a dashboard for product analytics ([2b19ea1](https://github.com/vnrocnr/Products-List/commit/2b19ea13f965fc21d141ad89499fd55a2b027c15))
+* implement sweetalert for delete product confirmation ([67f4d20](https://github.com/vnrocnr/Products-List/commit/67f4d20c78f92e9b285624749d8facd7bd026a3e))
+* **product:** push product ID to query when opening delete dialog ([d284966](https://github.com/vnrocnr/Products-List/commit/d28496641ad9d84fce7d0fee6132aca4728459bd))
+* **store:** used LocalStorage instead to store and load product list ([08f9b64](https://github.com/vnrocnr/Products-List/commit/08f9b64e96db4b3a0797d1cb9cbd7613ae5a04e9))
+
 ### [0.0.5](https://github.com/vnrocnr/Products-List/compare/v0.0.2...v0.0.5) (2025-06-15)
 
 
