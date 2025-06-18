@@ -1,13 +1,8 @@
 <template>
-  <div class="bg-orange h-100 w-100 overflow-none d-flex flex-column justify-center align-center"  >
- 
-
-    <v-card
-      class=" pa-12 pb-8"
-      elevation="8"
-     width="450"
-      rounded="lg"
-    >
+  <div
+    class="bg-orange-darken-3 h-100 w-100 overflow-none d-flex flex-column justify-center align-center"
+  >
+    <v-card class="pa-12 pb-8" elevation="8" width="450" rounded="lg">
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
       <v-text-field
@@ -17,10 +12,10 @@
         variant="outlined"
       ></v-text-field>
 
-      <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+      <div
+        class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+      >
         Password
-
-      
       </div>
 
       <v-text-field
@@ -33,44 +28,37 @@
         @click:append-inner="visible = !visible"
       ></v-text-field>
 
-   
-
-    
-
       <div class="btns d-flex flex-column ga-5 align-center">
         <v-btn
-       
-        color="orange"
-        size="large"
-        variant="tonal"
-        block
-        @click="handleLogin()"
-      >
-        Log In
-      </v-btn>
-      
-      <v-divider></v-divider>
-      <p class="text-subtitle-2">Doesn't have an account yet?</p>
-     
-        <router-link to="/signUp" class="text-decoration-none text-purple-darken-4">
-            
-            Sign In <v-icon icon="mdi-chevron-right"> </v-icon>
+          color="orange"
+          size="large"
+          variant="tonal"
+          block
+          @click="handleLogin()"
+        >
+          Log In
+        </v-btn>
 
- 
-           </router-link>
-    
+        <v-divider></v-divider>
+        <p class="text-subtitle-2">Doesn't have an account yet?</p>
+
+        <router-link
+          to="/signUp"
+          class="text-decoration-none text-purple-darken-4"
+        >
+          Sign In <v-icon icon="mdi-chevron-right"> </v-icon>
+        </router-link>
       </div>
-      
     </v-card>
   </div>
 </template>
 <script setup>
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router' 
-  const visible = ref(false)
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const visible = ref(false);
 
-const router = useRouter()
-  const handleLogin = () => {
-        router.replace('/dashboard')
-  }
+const router = useRouter();
+const handleLogin = () => {
+  router.replace("/dashboard");
+};
 </script>
