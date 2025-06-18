@@ -108,7 +108,7 @@ const description = useField("description");
 const price = useField("price");
 const category = useField("category");
 const image = useField("image")
-const items = ref(["men's clothing", "women's clothing", "jewelry", "electronics"]);
+const items = ref(["men's clothing", "women's clothing", "jewelery", "electronics"]);
 
 const submit = handleSubmit((values) => {
   // alert(JSON.stringify(values, null, 2))
