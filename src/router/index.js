@@ -26,8 +26,15 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
-      component: () => import("../views/Login.vue"),
+      component: () => import("../auth/Login.vue"),
     },
+    
+    {
+      path: "/signUp",
+      name: "signUp",
+      component: () => import("../auth/SignUp.vue"),
+    },
+
 
     {
       path: "/:catchAll(.*)",

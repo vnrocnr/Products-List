@@ -1,0 +1,86 @@
+<template>
+  <div class="bg-orange h-100 w-100 overflow-none d-flex flex-column justify-center align-center"  >
+ 
+
+    <v-card
+      class=" pa-12 pb-8"
+      elevation="8"
+     width="450"
+      rounded="lg"
+    >
+      <div class="text-subtitle-1 text-medium-emphasis">Account</div>
+
+      <v-text-field
+        density="compact"
+        placeholder="Email address"
+        prepend-inner-icon="mdi-email-outline"
+        variant="outlined"
+      ></v-text-field>
+
+      <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+        Password
+
+      
+      </div>
+
+      <v-text-field
+        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible ? 'text' : 'password'"
+        density="compact"
+        placeholder="Enter your password"
+        prepend-inner-icon="mdi-lock-outline"
+        variant="outlined"
+        @click:append-inner="visible = !visible"
+      ></v-text-field>
+
+   
+
+      <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+       Confirm Password
+
+      
+      </div>
+
+      <v-text-field
+        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible ? 'text' : 'password'"
+        density="compact"
+        placeholder="Enter your password again"
+        prepend-inner-icon="mdi-lock-outline"
+        variant="outlined"
+        @click:append-inner="visible = !visible"
+      ></v-text-field>
+
+      
+
+      <div class="btns d-flex flex-column ga-5 align-center">
+        <v-btn
+       
+        color="orange"
+        size="large"
+        variant="tonal"
+        block
+      >
+        Sign In
+      </v-btn>
+      
+      <v-divider></v-divider>
+      <p class="text-subtitle-2">Has an account already?</p>
+     
+        <router-link to="/login" class="text-decoration-none text-purple-darken-4">
+            
+            Log In <v-icon icon="mdi-chevron-right"> </v-icon>
+
+ 
+           </router-link>
+    
+      </div>
+      
+    </v-card>
+  </div>
+</template>
+<script setup>
+  import { ref } from 'vue'
+
+  const visible = ref(false)
+</script>
