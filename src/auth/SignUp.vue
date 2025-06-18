@@ -2,9 +2,17 @@
   <div
     class="bg-orange-darken-3 h-100 w-100 overflow-none d-flex flex-column justify-center align-center"
   >
-    <v-card class="pa-12 pb-8" elevation="8" width="450" rounded="lg">
-      <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
+
+    <v-card class="pa-12 pb-8 d-flex flex-column "  elevation="8" width="450" rounded="lg">
+
+<v-img height="80" width="80" :src="neembly" class="d-flex align-center w-100">
+
+        </v-img>
+
+      <div class="text-subtitle-1 text-medium-emphasis ">Account</div>
+
+        
       <v-text-field
         density="compact"
         placeholder="Email address"
@@ -71,6 +79,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import neembly from '../assets/icons/neembly-logo.png'
 const visible = ref(false);
 const router = useRouter();
 const handleLogin = () => {
