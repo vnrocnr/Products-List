@@ -1,4 +1,4 @@
-# A CRUD Application using Vue.JS
+# A CRUD Application using Vue.JS and Fake Store API
 
 
 ## A web application built with Vue.js and Vuetify, providing a responsive UI to Create, Read, Update, and Delete (CRUD) products. It includes real-time search and dynamic filtering features.
