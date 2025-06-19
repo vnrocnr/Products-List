@@ -29,27 +29,28 @@ This project is currently under active development. Expect frequent updates and 
 * Signin Page
 ![Signin List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/signin.png)
 
-* Product List
-![Product List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/listing.png)
 
 * Dashboard
 ![Dashboard](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/dashboard.png)
+
+* Product List
+![Product List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/listing.png)
 
 
 ## How to install this system
 
 1. Clone this repository.
-    - git clone repo-name
-    - cd repo-name
+    * git clone repo-name
+    * cd repo-name
 
 2. Install dependencies
-    - npm i
+    * npm i
 
 3. Run locally
-    - npm run dev
+    * npm run dev
 
 4. Build for production
-    - npm run build
+    * npm run build
 
 ## Find a bug? 
 
