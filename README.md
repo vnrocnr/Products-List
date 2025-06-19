@@ -1,7 +1,7 @@
-# A CRUD Application using Vue.JS
+# A CRUD Application using Vue.JS and Fake Store API
 
 
-## A web application written in Vue.JS that will display the list of products with CRUD and search functionalities. 
+## A web application built with Vue.js and Vuetify, providing a responsive UI to Create, Read, Update, and Delete (CRUD) products. It includes real-time search and dynamic filtering features.
 
 ### 🚧 PROJECT STATUS
 ⚠️ Ongoing Project. 
@@ -23,26 +23,34 @@ This project is currently under active development. Expect frequent updates and 
 * ✅ LocalStorage support
 
 ## 📸 Screenshots
-![Product List](../vstore/src/assets/screenshots/listing.png)
-![Dashboard](../vstore/src/assets/screenshots/dashboard.png)
-![Login Page](../vstore/src/assets/screenshots/login.png)
-![Signin List](../vstore/src/assets/screenshots/signin.png)
+* Login Page
+![Login Page](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/login.png)
+
+* Signin Page
+![Signin List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/signin.png)
+
+
+* Dashboard
+![Dashboard](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/dashboard.png)
+
+* Product List
+![Product List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/listing.png)
 
 
 ## How to install this system
 
 1. Clone this repository.
-    - git clone repo-name
-    - cd repo-name
+    * git clone repo-name
+    * cd repo-name
 
 2. Install dependencies
-    - npm i
+    * npm i
 
 3. Run locally
-    - npm run dev
+    * npm run dev
 
 4. Build for production
-    - npm run build
+    * npm run build
 
 ## Find a bug? 
 
