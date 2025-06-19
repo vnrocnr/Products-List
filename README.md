@@ -30,10 +30,10 @@ This project is currently under active development. Expect frequent updates and 
 ![Signin List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/signin.png)
 
 * Product List
-![Product List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/dashboard.png)
+![Product List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/listing.png)
 
 * Dashboard
-![Dashboard](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/listing.png)
+![Dashboard](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/dashboard.png)
 
 
 ## How to install this system
