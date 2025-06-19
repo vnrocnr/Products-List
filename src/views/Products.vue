@@ -206,7 +206,7 @@ import AddProductForm from "@/components/AddProductForm.vue";
 import DeleteDialog from "@/components/DeleteDialog.vue";
 import { useRouter } from "vue-router";
 import Swal from 'sweetalert2';
-import ProductDetails from "@/components/ProductDetails.vue";
+
 
 
 
