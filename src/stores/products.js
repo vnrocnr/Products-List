@@ -2,6 +2,7 @@ import Products from "@/views/Products.vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 import { ref, computed } from "vue";
+import Swal from 'sweetalert2';
 
 export const useProductsStore = defineStore(
   "product",
@@ -134,8 +135,15 @@ export const useProductsStore = defineStore(
         }
         products.value.push(productWithRating);
 
-        console.log(productWithRating)
+        // console.log(productWithRating)
         saveToLocalStorage();
+
+           Swal.fire({
+  title: "Added product successfully!",
+  icon: "success",
+
+});
+
     
       } catch (e) {
         error.value = e;
@@ -175,9 +183,17 @@ export const useProductsStore = defineStore(
             rating: existingRating,
           };
 
-          totalAddedProduct.value++
+
+ totalAddedProduct.value++
   console.log(totalAddedProduct.value)
           saveToLocalStorage();
+          Swal.fire({
+  title: "Updated product successfully!",
+  icon: "success",
+
+});
+
+         
         }
       } catch (e) {
         error.value = e;
