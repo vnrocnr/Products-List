@@ -1,7 +1,7 @@
 # A CRUD Application using Vue.JS
 
 
-## A web application written in Vue.JS that will display the list of products with CRUD and search functionalities. 
+## A web application built with Vue.js and Vuetify, providing a responsive UI to Create, Read, Update, and Delete (CRUD) products. It includes real-time search and dynamic filtering features.
 
 ### 🚧 PROJECT STATUS
 ⚠️ Ongoing Project. 
