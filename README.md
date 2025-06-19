@@ -1,43 +1,61 @@
-<<<<<<< HEAD
-# Products-List
-A web application that will display the list of products.
+# A CRUD Application using Vue.JS
 
-### ⚠️STATUS ⚠️
-This is an ongoing project. 
-=======
-# vstore
 
-This template should help get you started developing with Vue 3 in Vite.
+## A web application written in Vue.JS that will display the list of products with CRUD and search functionalities. 
 
-## Recommended IDE Setup
+### 🚧 PROJECT STATUS
+⚠️ Ongoing Project. 
+This project is currently under active development. Expect frequent updates and improvements.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
+* 🗃️ View list of products
 
-## Customize configuration
+* ➕ Add a new product
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+* ✏️ Edit product details
 
-## Project Setup
+* 🗑️ Delete a product
 
-```sh
-npm install
-```
+* 🔍 Search and filter products by title or ID
 
-### Compile and Hot-Reload for Development
+* 📊 Dashboard with top-rated and category-based summaries
 
-```sh
-npm run dev
-```
+* ✅ LocalStorage support
 
-### Compile and Minify for Production
+## 📸 Screenshots
+![Product List](../vstore/src/assets/screenshots/listing.png)
+![Dashboard](../vstore/src/assets/screenshots/dashboard.png)
+![Login Page](../vstore/src/assets/screenshots/login.png)
+![Signin List](../vstore/src/assets/screenshots/signin.png)
 
-```sh
-npm run build
-```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## How to install this system
 
-```sh
-npm run test:unit
-```
->>>>>>> dev
+1. Clone this repository.
+    - git clone repo-name
+    - cd repo-name
+
+2. Install dependencies
+    - npm i
+
+3. Run locally
+    - npm run dev
+
+4. Build for production
+    - npm run build
+
+## Find a bug? 
+
+If you found an issue or would like to submit an improvement to this project, please submit an issue using the issues tab above.
+
+
+## 🔧 Known Issues / Upcoming Features
+* 🔐 Login and Signup pages (UI only as of now)
+
+* ⚙️ Settings, Orders, Help pages
+
+* 🔒 Full authentication system 
+
+* 📱 Responsive enhancements
+
+* 📈 Pagination and product sorting
