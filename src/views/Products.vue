@@ -121,7 +121,13 @@
              
 
               <!-- Start of Update Functionality -->
-              <div class="text-center pa-4" height="25" width="25">
+
+
+
+
+
+
+              <div class="text-center pa-4"  >
                 <v-btn
                   @click="handleSelectedProduct(product)"
                   size="x-small"
@@ -132,8 +138,8 @@
                 >
                 </v-btn>
 
-                <v-dialog v-model="updateFormDialog" width="auto">
-                  <v-card width="500">
+                <v-dialog v-model="updateFormDialog" width="auto" scrim="rgba(0,0,0,0.2)" >
+                  <v-card width="500" elevation="0" >
                     <UpdateForm
                       :productData="selectedProduct"
                       :onUpdate="store.updateProduct"
@@ -144,6 +150,10 @@
                   </v-card>
                 </v-dialog>
               </div>
+
+
+
+
               <!-- End of Update Functionality -->
 
               <!-- Start of Delete Functionality -->
@@ -161,7 +171,7 @@
                     >
                     </v-btn>
 
-                    <v-dialog v-model="deleteDialog" width="auto">
+                    <v-dialog v-model="deleteDialog" width="auto" >
                         <v-card width="500">
                       
 
@@ -198,19 +208,10 @@ import { useRouter } from "vue-router";
 import Swal from 'sweetalert2';
 import ProductDetails from "@/components/ProductDetails.vue";
 
-// const { products, e, loading } = storeToRefs(useProductsStore());
+
 
 const router = useRouter()
-// const { header, combinedFiltered, filteredProducts, searchFilter, idFilter, locallyStored, products } = storeToRefs(
-//   useProductsStore()
-// );
-// const {
-//   fetchProducts,
-//   fetchProduct,
-//   updateProduct,
-//   addProduct,
-//   deleteProduct,
-// } = useProductsStore();
+
 
 
 const store = useProductsStore()
@@ -231,6 +232,8 @@ const handleSelectedProduct = (product) => {
   router.push({query: {id: selectedProduct.value.id}})
  
 };
+
+
 
 const handleDelete = (product) => {
   selectedProduct.value = product.id;
@@ -278,7 +281,7 @@ if (result.isConfirmed) {
 
 onMounted(() => {
 store.fetchProducts()
-
+console.log(store.lastID )
 
 });
 </script>
