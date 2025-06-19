@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/vnrocnr/Products-List/compare/v0.0.6...v0.0.7) (2025-06-19)
+
+
+### Features
+
+* **auth:** add login and signup pages ([a989c89](https://github.com/vnrocnr/Products-List/commit/a989c8951b6f79f00d4ca8517c33638854f148ee))
+* implement sweetalert for successful addition or updating of product ([460d4fe](https://github.com/vnrocnr/Products-List/commit/460d4fe0226ab5907f9505c17a56adea0c4f83ff))
+* **router:** add NotFound page for undefined routes ([dff3c64](https://github.com/vnrocnr/Products-List/commit/dff3c644875424dc17da88b118d3326541c20533))
+* **sidebar:** add list items for navigation including logout ([260f412](https://github.com/vnrocnr/Products-List/commit/260f412871007270b80221647b3bb5417f25efc5))
+
+
+### Bug Fixes
+
+* preserve added products by correctly incrementing ID in addProduct ([a84f680](https://github.com/vnrocnr/Products-List/commit/a84f68047c44cfd7a4be74d0d5841a98b849e163))
+* resolve issue where additional category is added when adding a new product ([86c6465](https://github.com/vnrocnr/Products-List/commit/86c6465d9afad62eae0b975624142c924f13e8ee))
+* resolve issue where rate cannot be read once another product is added ([b4d4198](https://github.com/vnrocnr/Products-List/commit/b4d4198590a3472ec9df95a4377153635e4648ad))
+* resolve issue where the data is not updating and total added product is not recorded ([b066f8e](https://github.com/vnrocnr/Products-List/commit/b066f8eff433e65149fb6f944d5ccc9829ea382f))
+* resolve issue where the update's dialog has a solid background of black instead of a see through one ([12aa941](https://github.com/vnrocnr/Products-List/commit/12aa94148d86956268e4b824c6781835a3e17d0b))
+* resolve layout issue for auth pages by setting the height and width of the app ([cc9de2b](https://github.com/vnrocnr/Products-List/commit/cc9de2be45c43ac95e2f6c40358a9594d7c3a225))
+* **routes:** ensure proper layout rendering and default child route ([141205d](https://github.com/vnrocnr/Products-List/commit/141205dcae8f470dbfe9fcf4b208cba390508b87))
+
 ### [0.0.6](https://github.com/vnrocnr/Products-List/compare/v0.0.5...v0.0.6) (2025-06-17)
 
 
