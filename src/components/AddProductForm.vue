@@ -1,5 +1,6 @@
 <template v-slot:actions>
   <form @submit.prevent="submit" class="d-flex flex-column pa-10">
+          <h2 class="ma-2 text-uppercase text-purple-darken-3">Add  new product</h2>
     <v-text-field
       v-model="title.value.value"
       :counter="5"

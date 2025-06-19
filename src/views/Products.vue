@@ -58,14 +58,11 @@
             >
             </v-btn>
 
-            <template #title>
-              <div class="w-100 ml-5 mt-10 text-h6 text-orange-darken-1">
-                Add new Product Here
-              </div>
-            </template>
+     
             <AddProductForm
               @closeDialog="dialog = false"
               :addNewProduct="store.addProduct"
+              title="Add new Product Here"
             />
           </v-card>
         </v-dialog>

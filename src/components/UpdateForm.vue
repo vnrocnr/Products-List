@@ -12,7 +12,7 @@
       >
 
       </v-btn>
-      <h3>Update Item Details</h3>
+      <h2 class="ma-2 text-uppercase text-purple-darken-3">update item details</h2>
       
 
       <v-text-field
