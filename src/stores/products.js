@@ -14,7 +14,7 @@ export const useProductsStore = defineStore(
     const limitDescription = ref("");
     const totalAddedProduct = ref(0);
     const totalRemovedProduct = ref(0);
-    const newID = ref(0);
+
 
     const totalPerCategory = computed(() => {
       const counts = {};
@@ -73,7 +73,6 @@ export const useProductsStore = defineStore(
       });
     });
 
-    const ratingAverage = computed(() => {});
 
     const topItems = computed(() => {
      return  products.value.filter(m => m.rating.rate >= 4.5).sort((a,b) =>{
@@ -151,7 +150,7 @@ export const useProductsStore = defineStore(
 
     
         const payload = {
-          id: payload.id,
+          id,
           title: product.title,
           price: product.price,
           description: product.description,
@@ -162,6 +161,8 @@ export const useProductsStore = defineStore(
         await axios.put(`https://fakestoreapi.com/products/${id}`, payload);
 
         const index = products.value.findIndex((p) => p.id === id);
+
+     
         if (index !== -1) {
       
           const existingRating = products.value[index].rating ?? {
@@ -174,6 +175,8 @@ export const useProductsStore = defineStore(
             rating: existingRating,
           };
 
+          totalAddedProduct.value++
+  console.log(totalAddedProduct.value)
           saveToLocalStorage();
         }
       } catch (e) {
