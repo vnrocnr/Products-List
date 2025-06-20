@@ -22,20 +22,9 @@ This project is currently under active development. Expect frequent updates and 
 
 * ✅ LocalStorage support
 
-## 📸 Screenshots
-* Login Page
-![Login Page](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/login.png)
-
-* Signin Page
-![Signin List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/signin.png)
-
-
-* Dashboard
-![Dashboard](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/dashboard.png)
-
-* Product List
-![Product List](https://github.com/vnrocnr/Products-List/blob/5d15facbf9dac2cfe2c6e76cba94aa480cecd700/src/assets/screenshots/listing.png)
-
+## 🎥 Video Demonstration
+Watch the full walkthrough of the system below:
+https://github.com/user-attachments/assets/495d65c1-46b7-47fa-a057-955cbb288a85
 
 ## How to install this system
 
