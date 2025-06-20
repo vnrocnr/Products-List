@@ -2,11 +2,13 @@
   <div
     class="bg-orange-darken-3 h-100 w-100 overflow-none d-flex flex-column justify-center align-center"
   >
-    <v-card class="pa-12 pb-8" elevation="8" width="450" rounded="lg">
+    <v-card class="pa-12 pb-8 d-flex flex-column " elevation="8" width="450" rounded="lg"> 
       
-      <v-img height="80" width="80" :src="neembly" class="d-flex align-center w-100">
+      <!-- <v-img height="80" width="80" :src="neembly" class="d-flex align-center w-100">
 
-        </v-img>
+        </v-img> -->
+
+        <h1 class=" d-flex text-center align-center text-orange-darken-3 justify-center">V.O</h1>
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
       <v-text-field

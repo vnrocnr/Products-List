@@ -2,7 +2,7 @@
   <v-navigation-drawer right class="bg-orange-darken-2">
 
     <div class="top">
-        <h1 class="text-white font-weight-bold text-center">NEEMBLY</h1>
+        <h1 class="text-white font-weight-bold text-center">COMPANY NAME</h1>
     </div>
     
     <v-list
