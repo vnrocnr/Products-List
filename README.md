@@ -7,7 +7,7 @@
 ⚠️ Ongoing Project. 
 This project is currently under active development. Expect frequent updates and improvements.
 
-## Features
+## Featuresw
 * 🗃️ View list of products
 
 * ➕ Add a new product
